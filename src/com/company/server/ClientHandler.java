@@ -1,11 +1,15 @@
 package com.company.server;
 
+import com.company.observerPattern.Category;
+
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class ClientHandler implements Runnable{
+
+    Category valorant = new Category("Valorant");
+    Category cod4 = new Category("CoD4");
 
     private Socket client;
 
@@ -24,28 +28,20 @@ public class ClientHandler implements Runnable{
             DataOutputStream outputStream = new DataOutputStream(client.getOutputStream());
             Scanner scanner = new Scanner(System.in);
 
-            String name="";
-            String inputData;
 
-            while ((inputData = bufferedReader.readLine()) != null){
+            while (true){
 
-                System.out.println("Data From Client: "+inputData);
-
-                switch (inputData) {
-
-                    default -> {
-                        String newMsg = scanner.nextLine();
-                        outputStream.writeBytes(newMsg+"\n");
-                        }
+                System.out.println("What Category you want to update? \n1. Valorant \n2. CoD4");
+                String newMsg = scanner.nextLine();
+                if (newMsg == "1"){
+                    valorant.upload("Test 1");
+                }
+                if (newMsg == "2"){
+                    cod4.upload("Test 2");
                 }
 
-                if(inputData.equals("exit")){
-                    break;
-                }
 
             }
-
-            client.close();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,6 +6,8 @@ import java.net.Socket;
 
 public class Server {
 
+
+
     public static void main(String[] args) throws IOException, InterruptedException {
         System.out.println("Server running...");
         ServerSocket serversocket = new ServerSocket(6000);
